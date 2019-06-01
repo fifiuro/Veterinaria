@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('servicios','ServiciosController@index');
+
+Route::get('clientes','ClientesController@index');
+
+Route::get('mascotas','MascotasController@index');
+
+Route::get('facturacion','FacturacionController@index');
