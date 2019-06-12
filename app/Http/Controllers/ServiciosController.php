@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Servicio;
 
 class ServiciosController extends Controller
 {
@@ -13,7 +14,7 @@ class ServiciosController extends Controller
      */
     public function index()
     {
-        return view('servicios.servicios');
+        //return view('servicios.servicios');
     }
 
     /**
@@ -23,7 +24,7 @@ class ServiciosController extends Controller
      */
     public function create()
     {
-        //
+        return view('servicios.NuevoServicio');
     }
 
     /**
@@ -34,7 +35,14 @@ class ServiciosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $servicio = new Servicio;
+
+        $servicio->nombre_se = $request->nombre_se;
+        $servicio->precio = $request->precio;
+        $servicio->obs_ser = $request->obs_se;
+        $servicio->estado = 1;
+
+        $servicio->save();
     }
 
     /**
@@ -56,7 +64,9 @@ class ServiciosController extends Controller
      */
     public function edit($id)
     {
-        //
+        $servicio = Servicio::find($id);
+
+        return view('servicios.RecuperarServicio')->with('servicio',$servicio);
     }
 
     /**
@@ -66,9 +76,16 @@ class ServiciosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $servicio = Servicio::find($request->id_se);
+
+        $servicio->nombre_se = $request->nombre_se;
+        $servicio->precio = $request->precio;
+        $servicio->obs_ser = $request->obs_se;
+        $servicio->estado = 1;
+
+        $servicio->save();
     }
 
     /**

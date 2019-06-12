@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Cliente;
 
 class ClientesController extends Controller
 {
@@ -23,7 +24,7 @@ class ClientesController extends Controller
      */
     public function create()
     {
-        //
+        return view('clientes.NuevoCliente');
     }
 
     /**
@@ -34,7 +35,17 @@ class ClientesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cliente = new Cliente;
+
+        $cliente->nombre_cli = $request->nombre_cli;
+        $cliente->apellidos_cli = $request->apellidos_cli;
+        $cliente->ci = $request->ci;
+        $cliente->celular = $request->celular;
+        $cliente->email = $request->email;
+        $cliente->direccion = $request->direccion;
+        $cliente->estado = 1;
+
+        $cliente->save();
     }
 
     /**
@@ -56,7 +67,9 @@ class ClientesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cliente = Cliente::find($id);
+
+        return view('clientes.RecuperarCliente')->with('cliente',$cliente);
     }
 
     /**
@@ -66,9 +79,19 @@ class ClientesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $cliente = Cliente::find($request->id_cli);
+
+        $cliente->nombre_cli = $request->nombre_cli;
+        $cliente->apellidos_cli = $request->apellidos_cli;
+        $cliente->ci = $request->ci;
+        $cliente->celular = $request->celular;
+        $cliente->email = $request->email;
+        $cliente->direccion = $request->direccion;
+        $cliente->estado = 1;
+
+        $cliente->save();
     }
 
     /**
