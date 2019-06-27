@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Cliente;
+use App\Http\Requests\ValidarClienteRequest;
 
 class ClientesController extends Controller
 {
@@ -14,8 +15,24 @@ class ClientesController extends Controller
      */
     public function index()
     {
-        return view('clientes.clientes');
+        return view('clientes.BuscarCliente');
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Request $request)
+    {
+        $clientes = Cliente::whereRaw('concat(nombre_cli," ",apellidos_cli) like "%'.$request->nombre.'%"')
+                           ->where('email','like','%'.$request->email.'%')
+                           ->get();
+
+        return view('clientes.BuscarCliente')->with('clientes',$clientes);
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -33,7 +50,7 @@ class ClientesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ValidarClienteRequest $request)
     {
         $cliente = new Cliente;
 
@@ -46,17 +63,8 @@ class ClientesController extends Controller
         $cliente->estado = 1;
 
         $cliente->save();
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return view('clientes.BuscarCliente');
     }
 
     /**
@@ -92,6 +100,13 @@ class ClientesController extends Controller
         $cliente->estado = 1;
 
         $cliente->save();
+
+        return view('clientes.BuscarCliente');
+    }
+
+    public function confirma($id)
+    {
+        return view('clientes.ConfirmaCliente')->with('id',$id);
     }
 
     /**
@@ -100,8 +115,12 @@ class ClientesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $cliente = Cliente::find($request->id_cli);
+
+        $cliente->delete();
+
+        return view('clientes.BuscarCliente');
     }
 }

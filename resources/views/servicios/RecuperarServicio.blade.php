@@ -31,7 +31,7 @@
             </div>
             <div class="border-top">
                 <div class="card-body">
-                    <button type="submit" class="btn btn-primary">GUARDAR</button>
+                    <button type="submit" class="btn btn-primary">MODIFICAR</button>
                     <a href="{{ url('BuscarServicio') }}" class="btn btn-danger">CANCELAR</a>
                 </div>
             </div>

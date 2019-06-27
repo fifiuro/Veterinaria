@@ -127,17 +127,17 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('servicios') }}" aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('BuscarServicio') }}" aria-expanded="false">
                                 <i class="mdi mdi-truck-delivery"></i><span class="hide-menu">Servicios</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('clientes') }}" aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('BuscarCliente') }}" aria-expanded="false">
                                 <i class="mdi mdi-account-multiple"></i><span class="hide-menu">Clientes</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('mascotas') }}" aria-expanded="false">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{{ url('BuscarMascota') }}" aria-expanded="false">
                                 <i class="mdi mdi-cow"></i><span class="hide-menu">Mascotas</span>
                             </a>    
                         </li>

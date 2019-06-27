@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Servicio;
+use App\Http\Requests\ValidarServicioRequest;
 
 class ServiciosController extends Controller
 {
@@ -14,7 +15,22 @@ class ServiciosController extends Controller
      */
     public function index()
     {
-        //return view('servicios.servicios');
+        return view('servicios.BuscarServicio');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Request $request)
+    {
+        $servicio = Servicio::where('nombre_se','like','%'.$request->nombre.'%')
+                            ->where('precio','like','%'.$request->precio.'%')
+                            ->get();
+
+        return view('servicios.BuscarServicio')->with('servicio',$servicio);
     }
 
     /**
@@ -33,7 +49,7 @@ class ServiciosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ValidarServicioRequest $request)
     {
         $servicio = new Servicio;
 
@@ -43,17 +59,8 @@ class ServiciosController extends Controller
         $servicio->estado = 1;
 
         $servicio->save();
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        return view('servicios.BuscarServicio');
     }
 
     /**
@@ -86,16 +93,27 @@ class ServiciosController extends Controller
         $servicio->estado = 1;
 
         $servicio->save();
+
+        return view('servicios.BuscarServicio');
     }
 
+    public function confirma($id)
+    {
+        return view('servicios.ConfirmaServicio')->with('id',$id);
+    }
+    
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $servicio = Servicio::find($request->id_se);
+
+        $servicio->delete();
+
+        return view('servicios.BuscarServicio');
     }
 }
