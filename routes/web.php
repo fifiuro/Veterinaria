@@ -69,6 +69,8 @@ Route::post('ModificarMascota','MascotaController@update');
 Route::get('ConfirmaMascota/{id}','MascotaContorller@confirma')->where('id','[0-9]+');
 // Eliminar Mascota
 Route::post('EliminaMascota','MascotaController@destroy');
+// Buscar al Cliente
+Route::post('showMascota','ClientesController@showMascota');
 
 
 

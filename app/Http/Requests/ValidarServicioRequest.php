@@ -25,7 +25,7 @@ class ValidarServicioRequest extends FormRequest
     {
         return [
             'nombre_se' => 'required',
-            'precio' => 'required',
+            'precio' => 'required|numeric',
             'obs_se' => 'required'
         ];
     }
@@ -35,6 +35,7 @@ class ValidarServicioRequest extends FormRequest
         return [
             'nombre_se.required' => 'Ingrese el nombre que identifica al servicio.',
             'precio.required' => 'Ingrese el precio del servicio',
+            'precio.numeric' => 'Ingrese un numero para el precio.',
             'obs_se.required' => 'Las observaciones on importantes.'
         ];
     }

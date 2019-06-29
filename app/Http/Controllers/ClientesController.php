@@ -28,9 +28,30 @@ class ClientesController extends Controller
     {
         $clientes = Cliente::whereRaw('concat(nombre_cli," ",apellidos_cli) like "%'.$request->nombre.'%"')
                            ->where('email','like','%'.$request->email.'%')
+                           ->orderBy('nombre_cli')
                            ->get();
 
         return view('clientes.BuscarCliente')->with('clientes',$clientes);
+    }
+
+    public function showMascota(Request $request)
+    {
+        $todo = '';
+        $clientes = Cliente::whereRaw('concat(nombre_cli," ",apellidos_cli) like "%'.$request->nombre.'%"')
+                           ->get();
+
+        //dd($clientes);
+        foreach($clientes as $key => $c)
+        {
+            $todo .= '<tr>';
+            $todo .= '<td>'.$c->nombre_cli.' '.$c->apellidos_cli.'</td>';
+            $todo .= '<td>'.$c->ci.'</td>';
+            $todo .= '<td>'.$c->celular.'</td>';
+            $todo .= '<td>'.$c->email.'</td>';
+            $todo .= '</tr>';
+        }
+
+        return $todo;
     }
 
 
